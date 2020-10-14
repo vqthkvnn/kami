@@ -1,0 +1,2 @@
+# kami
+Diễn đàn Kami
