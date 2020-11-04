@@ -4,7 +4,7 @@ import router from './router'
 import vuetify from './plugins/vuetify';
 import Header from './components/Header.vue'
 import body from './components/body.vue'
-import ModalLogin from './components/Login.vue'
+import ModalLogin from './components/Regester.vue'
 Vue.config.productionTip = false
 Vue.component('app-header',Header);
 Vue.component('app-body',body);

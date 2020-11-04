@@ -36,7 +36,7 @@
       <validation-provider
         v-slot="{ errors }"
         name="Password1"
-        rules="required|password"
+        rules="required"
       >
         <v-text-field
           v-model="password"
@@ -54,27 +54,29 @@
       </validation-provider>
       <validation-provider
         v-slot="{ errors }"
-        name="Password2"
-        rules="required|password"
+        name="Repassword"
+        rules=""
+        
+        
       >
         <v-text-field
           v-model="repassword"
           :error-messages="errors"
-          label="Password"
+          label="Repassword"
           :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show2 ? 'text' : 'password'"
             name="input-10-1"
             hint="At least 8 characters"
             counter
-            @click:append="show1 = !show1"
+            @click:append="show2 = !show2"
           required
         ></v-text-field>
       </validation-provider>
       <v-btn
         class="mr-4"
         type="submit"
-        :disabled="invalid"
+        @click="checkpass"
       >
         OK
       </v-btn>
@@ -101,7 +103,8 @@
   extend('email', {
     ...email,
     message: 'Email must be valid',
-  })
+  }) 
+
   export default {
     components: {
       ValidationProvider,
@@ -123,6 +126,7 @@
       password:'',
       repassword:'',
       rules: {
+          //equalpass:value=> password !== value || 'Password error equal',
           required: value => !!value || 'Required.',
           min: v => v.length >= 8 || 'Min 8 characters',
           emailMatch: () => (`The email and password you entered don't match`),
@@ -133,11 +137,21 @@
         this.$refs.observer.validate()
       },
       clear () {
+        console.log(this.name)
         this.name = ''
         this.email = ''
         this.select = null
         this.checkbox = null
+        this.password=''
+        this.repassword=''
+        
         this.$refs.observer.reset()
+      },
+      checkpass(){
+        if (this.repassword!==this.password){
+          console.log("error")
+        }
+        
       },
     },
   }
