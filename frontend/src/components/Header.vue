@@ -10,7 +10,7 @@
         </v-col>
         <v-col cols="5"> </v-col>
         <v-col cols="2" justify="center" style="margin: auto" data-app>
-          <v-dialog v-model="dialog" persistent>
+          <v-dialog v-model="dialogreg" persistent>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 depressed
@@ -33,16 +33,17 @@
               <v-card-title class="headline" style="font-size: 40px;font-family: cursive;justify-content: center;"> 
                 SIGN UP
               </v-card-title>
-              <app-login></app-login>
-              
+                <modalreg/>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="green darken-1" text @click="dialog = false">
+                <v-btn color="green darken-1" text @click="dialogreg = false">
                   CLOSE
                 </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
+          <v-dialog v-model="dialoglog" persistent>
+            <template v-slot:activator="{ on, attrs }">
           <v-btn
             depressed
             small
@@ -52,9 +53,28 @@
               margin-left: 5px;
               font-family: inherit;
             "
+            v-bind="attrs"
+            v-on="on"
           >
             <v-icon>{{ icons.mdiAccount }}</v-icon> login
           </v-btn>
+            </template>
+            <v-card style="
+                width: 75%;
+                margin: auto;
+            ">
+              <v-card-title class="headline" style="font-size: 40px;font-family: cursive;justify-content: center;"> 
+                SIGN UP
+              </v-card-title>
+                <modallog/>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green darken-1" text @click="dialoglog = false">
+                  CLOSE
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-col>
         <v-col cols="2" style="margin: auto">
           <div style="">
@@ -79,8 +99,13 @@
 </template>
 <script>
 import { mdiAccount, mdiPencil, mdiShareVariant, mdiDelete } from "@mdi/js";
+import Modallog from './Login.vue'
+import Modalreg from './Regester.vue'
 export default {
-  components:{} ,
+  components:{
+    Modallog,
+    Modalreg,
+  } ,
   data() {
     return {
       icons: {
@@ -89,7 +114,8 @@ export default {
         mdiShareVariant,
         mdiDelete,
       },
-      dialog: false,
+      dialoglog: false,
+      dialogreg:false,
     };
   },
 };

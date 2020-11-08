@@ -1,6 +1,15 @@
 <template>
   <div>
     <app-header></app-header>
-    <app-body></app-body>
+    <modalpost/>
   </div>
 </template>
+<script>
+import Modalpost from './components/Post.vue'
+export default {
+  components:{
+    Modalpost,
+  }
+  
+}
+</script>

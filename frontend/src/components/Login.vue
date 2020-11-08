@@ -8,20 +8,7 @@
       @submit.prevent="submit"
       >
       
-      <validation-provider
-        v-slot="{ errors }"
-        name="Name"
-        rules="required|max:10"
-      >
-        <v-text-field
-          v-model="name"
-          :counter="10"
-          :error-messages="errors"
-          label="Name"
-          required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
+    <validation-provider
         v-slot="{ errors }"
         name="email"
         rules="required|email"
@@ -35,7 +22,7 @@
       </validation-provider>
       <validation-provider
         v-slot="{ errors }"
-        name="Password1"
+        name="Password"
         rules="required"
       >
         <v-text-field
@@ -52,38 +39,14 @@
           required
         ></v-text-field>
       </validation-provider>
-      <validation-provider
-        v-slot="{ errors }"
-        name="Repassword"
-        rules=""
-        
-        
-      >
-        <v-text-field
-          v-model="repassword"
-          :error-messages="errors"
-          label="Repassword"
-          :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="[rules.required, rules.min]"
-            :type="show2 ? 'text' : 'password'"
-            name="input-10-1"
-            hint="At least 8 characters"
-            counter
-            @click:append="show2 = !show2"
-          required
-        ></v-text-field>
-      </validation-provider>
-      <v-btn
+        <v-btn
         class="mr-4"
         type="submit"
         @click="checkpass"
       >
         OK
       </v-btn>
-      <v-btn @click="clear">
-        clear
-      </v-btn>
-    </form>
+      </form>
   </div>
   </validation-observer>
 </template>
@@ -113,18 +76,8 @@
     data: () => ({
       name: '',
       email: '',
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ],
       checkbox: null,
-      show1:false,
-      show2:false,
       password:'',
-      repassword:'',
       rules: {
           //equalpass:value=> password !== value || 'Password error equal',
           required: value => !!value || 'Required.',
