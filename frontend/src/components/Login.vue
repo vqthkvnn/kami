@@ -1,4 +1,17 @@
 <template>
+<div>
+  hihi
+</div>
+</template>
+<script>
+export default {
+  name:"Login"
+}
+</script>
+<style>
+
+</style>
+<template>
   <validation-observer
     ref="observer"
     v-slot="{ }"
@@ -69,6 +82,7 @@
   }) 
 
   export default {
+    name:'Login',
     components: {
       ValidationProvider,
       ValidationObserver,

@@ -52,6 +52,7 @@ Alternatively, you can grab the library off of unpkg:</p>
 </template>
 <script>
 export default {
+  name:'Comment',
     data () {
       return {
        

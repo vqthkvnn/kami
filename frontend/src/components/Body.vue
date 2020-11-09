@@ -79,6 +79,7 @@
 </template>
 <script>
 export default {
+  name:'Body',
     data () {
       return {
         select: ['All categories'],

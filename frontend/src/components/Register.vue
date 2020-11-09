@@ -106,6 +106,7 @@
   }) 
 
   export default {
+    name:'Register',
     components: {
       ValidationProvider,
       ValidationObserver,
