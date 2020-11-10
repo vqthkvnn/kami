@@ -9,8 +9,11 @@
          border-bottom: groove;
          border-bottom-width: thin;   
       ">
-         <div class="pa-3 yellow rounded-circle d-inline-block ">PHP 
-         </div>            
+        <v-col cols="1">
+          <div class="pa-2 yellow rounded-circle d-inline-block " style="float:left;margin-right:10px;"> 
+         </div>
+         <p>PHP</p>
+        </v-col>
         </v-row>
         <v-row>
           <v-col cols="1">
@@ -68,16 +71,16 @@
 
         </v-col>
         <v-col cols="11"
-        style="border-style: ridge;background-color: #f9f9f9;"
+        style="border-style:ridge;background-color: #f9f9f9;"
         >
             <v-row>
-              <v-col cols="1" style="margin: auto;">
-                <h1 style="font-size:15px;color:#999;">
+              <v-col cols="1">
+                <h1 style="font-size:14px;color:#999;">
                  created
                 </h1> 
               </v-col>
               <v-col cols="1">
-                <h1 style="font-size:15px;color:#999;">
+                <h1 style="font-size:14px;color:#999;">
                  last reply
                 </h1> 
               </v-col>
@@ -106,7 +109,7 @@
                   src="https://picsum.photos/id/11/500/300"
                   style="border-radius:100%;float:left;position: relative;margin-right: 10px;bottom:10px;">
                 </v-img>
-                <div style="">10d</div>
+                <div>10d</div>
               </v-col>
               <v-col cols="1">
                 <v-img
@@ -116,7 +119,7 @@
                   src="https://picsum.photos/id/11/500/300"
                   style="border-radius:100%;float:left;position: relative;margin-right: 10px;bottom:10px;">
                 </v-img>
-                <div style="">24h</div>
+                <div >24h</div>
               </v-col>      
               <v-col cols="1">
                  <h1 style="font-size:15px;color:#999;">
