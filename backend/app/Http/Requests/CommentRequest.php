@@ -24,8 +24,8 @@ class CommentRequest extends BaseRequest
     public function rules()
     {
         return [
-            'email' => 'required',
-            'password' => 'required'
+            'post_id' => 'required',
+            'comment_content_main' => 'required',
         ];
     }
 
@@ -37,8 +37,8 @@ class CommentRequest extends BaseRequest
     public function attributes()
     {
         return [
-            'name' => 'メールアドレス',
-            'password' => 'パスワード',
+            'post_id' => 'Post ID',
+            'comment_content_main' => 'Comment Content Main',
         ];
     }
 }

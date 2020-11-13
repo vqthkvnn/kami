@@ -8,8 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     protected $table = "notification";
-    public function account(){
-        return $this->belongsTo('App\Models\Account', 'user_name', 'user_name');
+    public $timestamps = false;
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class, 'user_name', 'user_name');
     }
+    protected $fillable = [
+        'notification_id',
+        'notification_content',
+        'notification_date',
+        'notification_type',
+    ];
 
 }

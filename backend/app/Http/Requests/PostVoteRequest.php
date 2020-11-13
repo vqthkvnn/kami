@@ -24,8 +24,7 @@ class PostVoteRequest extends BaseRequest
     public function rules()
     {
         return [
-            'email' => 'required',
-            'password' => 'required'
+            'post_id' => 'required',
         ];
     }
 
@@ -37,8 +36,7 @@ class PostVoteRequest extends BaseRequest
     public function attributes()
     {
         return [
-            'name' => 'メールアドレス',
-            'password' => 'パスワード',
+            'post_id' => 'Post Id'
         ];
     }
 }

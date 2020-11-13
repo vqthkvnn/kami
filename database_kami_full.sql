@@ -10,6 +10,7 @@ create table account
     user_date_create date          not null default NOW(),
     user_date_block  date          null,
     user_linked      int           null,
+    user_permission int not null default 0,
     user_note        nvarchar(255) null
 );
 alter table account
@@ -26,7 +27,7 @@ alter table subject
 create table notification
 (
     notification_id      int         not null auto_increment primary key,
-    notification_content VARCHAR(21844) CHARACTER SET utf8,
+    notification_content TEXT CHARACTER SET utf8,
     notification_date    date        null,
     notification_type    int         null,
     user_name            varchar(30) not null
@@ -42,16 +43,14 @@ create table tag
 -- post
 create table post
 (
-    post_id          int           not null auto_increment,
+    post_id          int           not null auto_increment primary key,
     post_date_create date          not null default NOW(),
     user_name        varchar(30)   not null,
-    subject_id       varchar(30)   not null,
+    subject_id       int           not null,
     post_status      int           not null default 1,
     post_date_delete date          null,
     post_note        nvarchar(255) null
 );
-alter table post
-    add primary key (post_id);
 alter table post
     add foreign key (user_name) references account (user_name);
 alter table post
@@ -60,9 +59,10 @@ create table post_content
 (
     post_id             int         not null,
     post_content_id     int         not null,
+    post_content_title nvarchar(255) not null,
     post_content_create date default NOW(),
     user_name           varchar(30) not null,
-    post_content_main   VARCHAR(21844) CHARACTER SET utf8
+    post_content_main   TEXT CHARACTER SET utf8
 );
 alter table post_content
     add primary key (post_id, post_content_id);
@@ -84,7 +84,7 @@ alter table post_tag
 create table post_vote
 (
     user_name varchar(30) not null,
-    post_id   varchar(30) not null
+    post_id   int         not null
 );
 alter table post_vote
     add primary key (user_name, post_id);
@@ -95,8 +95,8 @@ alter table post_vote
 -- comment
 create table comment
 (
-    comment_id            int           not null auto_increment,
-    post_id               varchar(30)   not null,
+    comment_id            int           not null auto_increment primary key,
+    post_id               int           not null,
     comment_date          date          not null default NOW(),
     comment_status        int           not null default 1,
     user_name             varchar(30)   not null,
@@ -106,8 +106,6 @@ create table comment
     comment_note          nvarchar(255) null
 );
 alter table comment
-    add primary key (comment_id);
-alter table comment
     add foreign key (post_id) references post (post_id);
 alter table comment
     add foreign key (user_name) references account (user_name);
@@ -116,7 +114,7 @@ create table comment_content
     comment_id             int not null,
     comment_content_id     int not null,
     comment_content_create date default NOW(),
-    comment_content_main   VARCHAR(21844) CHARACTER SET utf8
+    comment_content_main   TEXT CHARACTER SET utf8
 );
 alter table comment_content
     add primary key (comment_id, comment_content_id);
@@ -125,7 +123,7 @@ alter table comment_content
 create table comment_vote
 (
     user_name  varchar(30) not null,
-    comment_id varchar(30) not null
+    comment_id int         not null
 );
 alter table comment_vote
     add primary key (comment_id, user_name);
