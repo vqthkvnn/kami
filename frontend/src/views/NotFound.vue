@@ -10,7 +10,15 @@
 import DefaultLayout from "@/components/DefaultLayout";
 export default {
   name: "NotFound",
-  components: {DefaultLayout}
+  components: {DefaultLayout},
+  watch: {
+    title: {
+      immediate: true,
+      handler() {
+        document.title = "Not Found Page - 404";
+      },
+    },
+  },
 }
 </script>
 

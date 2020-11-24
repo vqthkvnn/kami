@@ -11,8 +11,18 @@ const routes = [
     component: Home
   },
   {
-    path: '/post',
+    path: '/post/:id',
     component: () => import('@/views/PostDetail'),
+    hidden: true
+  },
+  {
+    path: '/profile',
+    component: () => import('@/views/Profile'),
+    hidden: true
+  },
+  {
+    path: '/logout',
+    component: () => import('@/components/Logout'),
     hidden: true
   },
   {
