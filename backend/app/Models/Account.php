@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
-    private $key = 'user_name';
+//    private $key = 'user_email';
     protected $table = "account";
+    protected $primaryKey = 'user_name';
+    public $timestamps = false;
 
     public function comment()
     {

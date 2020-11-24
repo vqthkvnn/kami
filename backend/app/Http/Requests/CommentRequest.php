@@ -25,7 +25,7 @@ class CommentRequest extends BaseRequest
     {
         return [
             'post_id' => 'required',
-            'comment_content_main' => 'required',
+            'comment_content' => 'required',
         ];
     }
 
@@ -38,7 +38,7 @@ class CommentRequest extends BaseRequest
     {
         return [
             'post_id' => 'Post ID',
-            'comment_content_main' => 'Comment Content Main',
+            'comment_content' => 'Comment Content',
         ];
     }
 }

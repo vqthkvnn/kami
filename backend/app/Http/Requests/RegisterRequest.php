@@ -4,7 +4,7 @@
 namespace App\Http\Requests;
 
 
-class AccountRequest extends BaseRequest
+class RegisterRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class AccountRequest extends BaseRequest
     public function rules()
     {
         return [
-            'user_full_name' => 'required',
-            'user_birth' => 'required',
+            'user_name' => 'required',
+            'user_email' => 'required',
+            'password' => 'required',
         ];
     }
 
@@ -37,8 +38,9 @@ class AccountRequest extends BaseRequest
     public function attributes()
     {
         return [
-            'user_full_name' => 'user full name',
-            'user_birth' => 'user birth',
+            'user_name' => 'User Name',
+            'user_email' => 'User Email',
+            'password' => 'Password',
         ];
     }
 }

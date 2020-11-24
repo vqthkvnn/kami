@@ -1,14 +1,17 @@
 <?php
 
+
 namespace App\Http\Controllers\api;
+
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\User;
-use Validator;
+
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use JWTAuth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -19,7 +22,8 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup', 'post', 'comment',
+            'subject']]);
     }
 
     /**
@@ -27,21 +31,42 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    public function login(Request $request)
+    public function login()
     {
-        $credentials =  Validator::make($request->all(), [
-            'user_email' => 'required|email',
-            'user_pass' => 'required|string',
-        ]);
-        if ($credentials->fails()) {
-            return response()->json($credentials->errors(), 422);
+        $credentials = request(['user_email', 'password']);
+        $credentials['user_status'] = 1;
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Email hoặc password không tồn tại'], 401);
         }
 
-        if (! $token = auth()->attempt($credentials->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+        return $this->respondWithToken($token);
+    }
 
-        return $this->createNewToken($token);
+    public function signup(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $id = User::all()->count();
+            var_dump($id);
+            $user = User::create([
+                'user_name' => $request['user_name'],
+                'user_email' => $request['user_email'],
+                'password' => $request['password'],
+                'id' => (int)($id+1),
+            ]);
+            DB::commit();
+            return response()->json(['success'=>true,
+                'data'=>$user,
+                ], 200);
+        } catch (\Exception $exception) {
+            report($exception);
+            DB::rollback();
+            return response()->json([
+                'error' => true,
+                'success' => false,
+                'message' => $exception->getMessage()
+            ], 400);
+        }
     }
 
     /**
@@ -51,7 +76,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json([auth()->user()->user_name]);
     }
 
     /**
@@ -88,26 +113,8 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()
         ]);
-    }
-    /**
-     * Register a User.
-     *
-     * @return JsonResponse
-     */
-    public function register() {
-
-        $model = new Account();
-        $data = [];
-        $data['user_name'] = 'abc12345678';
-        $data['user_email'] = 'abc12345678@kami.com';
-        $data['user_pass'] = bcrypt('123456782');
-        $model->fill($data);
-        $model->save();
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $model
-        ], 201);
     }
 }

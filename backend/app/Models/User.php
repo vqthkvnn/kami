@@ -6,13 +6,15 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
+
     protected $table = 'account';
-    protected $user_pass;
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +23,12 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'user_name',
         'user_email',
-        'user_pass'=>'password',
+        'password',
+        'user_status',
+        'user_permission',
+        'user_full_name',
+        'user_avatar',
+        'id'
     ];
 
     /**
@@ -30,7 +37,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'user_pass',
+        'password',
     ];
 
     /**
@@ -39,7 +46,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+//        'email_verified_at' => 'datetime',
     ];
     // Rest omitted for brevity
 
@@ -53,6 +60,7 @@ class User extends Authenticatable implements JWTSubject
         // TODO: Implement getJWTIdentifier() method.
         return $this->getKey();
     }
+
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
@@ -62,8 +70,5 @@ class User extends Authenticatable implements JWTSubject
     {
         // TODO: Implement getJWTCustomClaims() method.
         return [];
-    }
-    public function getAuthPassword(){
-        return $this->user_pass;
     }
 }

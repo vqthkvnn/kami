@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     protected $table = "subject";
-    public function post(){
+    public $timestamps = false;
+
+    public function post()
+    {
         return $this->hasMany(Post::class, 'subject_id', 'subject_id');
     }
+
     protected $fillable = [
         'subject_id',
         'subject_content',

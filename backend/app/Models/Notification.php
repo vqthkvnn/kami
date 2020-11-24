@@ -14,10 +14,12 @@ class Notification extends Model
     {
         return $this->belongsTo(Account::class, 'user_name', 'user_name');
     }
+
     protected $fillable = [
         'notification_id',
         'notification_content',
         'notification_date',
+        'user_name',
         'notification_type',
     ];
 

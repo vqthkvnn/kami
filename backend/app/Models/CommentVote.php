@@ -9,6 +9,7 @@ class CommentVote extends Model
 {
     protected $table = "comment_vote";
     public $timestamps = false;
+
     public function account()
     {
         return $this->belongsTo(Account::class, 'user_name', 'user_name');

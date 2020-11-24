@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
 
 class NotificationController extends Controller
 {
@@ -15,7 +17,15 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        //
+
+        $data = Notification::where('user_name', auth()->user()->user_name)
+            ->orderByDesc('notification_date')
+            ->select('notification_id', 'notification_content', 'notification_date')->get();
+        return response()->json([
+            'success' => true,
+            'data' => $data
+        ], 200);
+
     }
 
     /**
@@ -42,7 +52,7 @@ class NotificationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return JsonResponse
      */
     public function show($id)
@@ -53,7 +63,7 @@ class NotificationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return JsonResponse
      */
     public function edit($id)
@@ -65,7 +75,7 @@ class NotificationController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return JsonResponse
      */
     public function update(Request $request, $id)
@@ -76,7 +86,7 @@ class NotificationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

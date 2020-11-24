@@ -17,9 +17,9 @@ class SubjectController extends Controller
     public function index()
     {
         return response()->json([
-            'success'=>true,
-            'data'=>Subject::all()
-        ],200);
+            'success' => true,
+            'data' => Subject::all()
+        ], 200);
     }
 
     /**
@@ -46,7 +46,7 @@ class SubjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return JsonResponse
      */
     public function show($id)
@@ -57,7 +57,7 @@ class SubjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return JsonResponse
      */
     public function edit($id)
@@ -69,7 +69,7 @@ class SubjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return JsonResponse
      */
     public function update(Request $request, $id)
@@ -80,7 +80,7 @@ class SubjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return JsonResponse
      */
     public function destroy($id)

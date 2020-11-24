@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class CommentContent extends Model
 {
     protected $table = "comment_content";
+    protected $primaryKey = ['comment_id','comment_content_id'];
+    public $incrementing = false;
     public $timestamps = false;
+
     public function comment()
     {
         return $this->belongsTo(Comment::class, 'comment_id', 'comment_id');
@@ -18,6 +21,6 @@ class CommentContent extends Model
     protected $fillable = [
         'comment_id',
         'comment_content_id',
-        'comment_content_main',
+        'comment_content_main'
     ];
 }

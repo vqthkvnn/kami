@@ -13,7 +13,7 @@ class PostVoteRequest extends BaseRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**

@@ -24,10 +24,8 @@ class PostRequest extends BaseRequest
     public function rules()
     {
         return [
-            'post_code' => 'required',
             'post_content' => 'required',
             'subject_id' => 'required',
-            'post_status' => 'required',
             'post_title' => 'required'
         ];
     }
@@ -40,10 +38,8 @@ class PostRequest extends BaseRequest
     public function attributes()
     {
         return [
-            'post_code' => 'Code',
             'post_content' => 'Content',
             'subject_id' => 'Subject ID',
-            'post_status' => 'Status',
             'post_title' => 'Title',
         ];
     }

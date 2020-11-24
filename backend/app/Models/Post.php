@@ -22,23 +22,41 @@ class Post extends Model
     public function subject_short()
     {
         return $this->belongsTo(Subject::class, 'subject_id', 'subject_id')
-            ->select("subject_id","subject_tag",'subject_color');
+            ->select("subject_id", "subject_tag", 'subject_color');
     }
-    public function comment(){
-        return $this->hasMany(Comment::class, 'comment_id','comment_id');
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class, 'comment_id', 'comment_id');
     }
-    public function postContent(){
-        return $this->hasOne(PostContent::class,'post_id','post_id')
+
+    public function postContent()
+    {
+        return $this->hasOne(PostContent::class, 'post_id', 'post_id')
             ->orderByDesc('post_content_id')
-            ->select(['post_id','post_content_title', 'post_content_create', 'user_name']);
+            ->select(['post_id', 'post_content_title', 'post_content_create', 'user_name']);
     }
-    public function postVote(){
-        return $this->hasMany(PostVote::class,'post_id','post_id');
+
+    public function postContentFull()
+    {
+        return $this->hasOne(PostContent::class, 'post_id', 'post_id')
+            ->orderByDesc('post_content_id')
+            ->select(['post_id', 'post_content_title', 'post_content_create', 'user_name',
+                'post_content_main']);
     }
-    public function postTag(){
-        return $this->belongsToMany(Tag::class,'post_tag', 'post_id', 'tag_id')
+
+    public function postVote()
+    {
+        return $this->hasMany(PostVote::class, 'post_id', 'post_id');
+    }
+
+    public function postTag()
+    {
+        return $this->belongsToMany(Tag::class, 'post_tag', 'post_id',
+            'tag_id')
             ->select('tag_content');
     }
+
     protected $fillable = [
         'post_id',
         'post_content',
