@@ -29,8 +29,10 @@
           vertical
       ></v-divider>
       <v-col cols="9.5">
-        <item-activity v-if="dataActivity  !== null" v-for="(item, index) in dataActivity" :key="index" :data-item="item" :avatar-user="avatar"/>
-        <item-activity-comment v-if="dataComment !== null" v-for="(item, index) in dataComment" :key="index" :data-comment="item" :avatar-user="avatar"/>
+        <item-activity v-if="dataActivity  !== null" v-for="(item, index) in dataActivity" :key="index"
+                       :data-item="item" :avatar-user="avatar"/>
+        <item-activity-comment v-if="dataComment !== null" v-for="(item, index) in dataComment" :key="index"
+                               :data-comment="item" :avatar-user="avatar"/>
       </v-col>
     </v-row>
   </div>
@@ -52,7 +54,7 @@ export default {
       items: ['All', 'Topics', 'Comments', 'Likes', 'Bookmarks', 'Views'],
       dataActivity: [],
       avatar: '',
-      dataComment:[]
+      dataComment: []
     }
   },
   async created() {
@@ -87,8 +89,8 @@ export default {
           param: {}
         };
         await axios.get(api.ACCOUNT_URL + 'activity', {
-          headers:{Authorization: `Bearer ` + this.$cookie.get('token')},
-          params:{key:this.selectedItem}
+          headers: {Authorization: `Bearer ` + this.$cookie.get('token')},
+          params: {key: this.selectedItem}
         }).then(
             res => {
               if (res.status === 200 && res.data.success === true) {
